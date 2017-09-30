@@ -1,0 +1,99 @@
+conky.config = {
+  -- -- Conky settings -- #
+	    background = false,
+	    update_interval = 1,
+
+	    cpu_avg_samples = 2,
+	    net_avg_samples = 2,
+
+	    override_utf8_locale = true,
+
+	    double_buffer = true,
+	    no_buffers = true,
+
+      text_buffer_size = 32768,
+      imlib_cache_size = 0,
+
+  -- -- Colors
+
+  		color0 = '3b31b6',
+  		color1 = '5b31b6',
+  		color2 = '7b31b6',
+  		color3 = '9b31b6',
+
+  -- -- Window specifications -- #
+	    own_window = true,
+      own_window_type = 'dock',
+      own_window_argb_visual = true,
+      own_window_argb_value = 0,
+	    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+      own_window_title = 'clicky',
+
+	    border_inner_margin = 50,
+	    border_outer_margin = 0,
+
+
+  --minimum_size 1100 700
+	    maximum_width = 700,
+
+	    alignment = 'top_right',
+	    gap_x = 0,
+	    gap_y = 90,
+
+  -- -- Graphics settings -- #
+	    draw_shades = false,
+	    draw_outline = false,
+	    draw_borders = false,
+	    draw_graph_borders = false,
+
+  -- -- Text settings -- #
+	    use_xft = true,
+	    font = 'Ubuntu Mono:size=10',
+	    xftalpha = 0.8,
+	    top_name_width = 10,
+      --Ícones: ${font Conky Icons by Carelli:size=14}
+
+	    uppercase = false,
+
+	    default_color = '#FFFFFF',
+
+      --own_window_transparent yes
+	    own_window_colour = '#000000',
+	    minimum_width = 400, minimum_height = 700,
+
+      --CORRECT THIS PATH
+      lua_load = '~/.config/conky/rings.lua',
+      lua_draw_hook_pre = 'conky_rings',
+};
+
+conky.text = [[${font ubuntu Mono:size=12}
+  ${downspeedgraph wlp62s0 30,100 FFFFFF FFFFFF}${color #FFFFFF} Dw  ${color0}${downspeed wlp62s0}
+  ${upspeedgraph   wlp62s0 30,100 FFFFFF FFFFFF}${color #FFFFFF} Up  ${color3}${upspeed wlp62s0}
+  ${offset 110}${voffset   0}${font Ubuntu Mono:size=8}${color #FFFFFF}TDown ${color0}${totaldown wlp62s0}
+  
+  ${offset  5}${voffset 45}${font Ubuntu Mono:size=12}${color #FFFFFF}CPU
+  ${font Ubuntu Mono:size=8}
+  ${offset  125}${voffset  10}${color0}${exec sensors | grep -o 'Core 0:        +[0-9].' | sed -r 's/0:|[^0-9]//g'}°
+  ${offset  160}${voffset -20}${color1}${exec sensors | grep -o 'Core 1:        +[0-9].' | sed -r 's/1:|[^0-9]//g'}°
+  ${offset  195}${voffset -20}${color2}${exec sensors | grep -o 'Core 2:        +[0-9].' | sed -r 's/2:|[^0-9]//g'}°
+  ${offset  230}${voffset -20}${color3}${exec sensors | grep -o 'Core 3:        +[0-9].' | sed -r 's/3:|[^0-9]//g'}°
+  ${font Ubuntu Mono:size=10}
+  ${goto 20}${color0}RAM
+
+  ${goto 20}${color #FFFFFF}$mem/$memmax${font Ubuntu Mono:size=8}${color cccccc}($memperc%)
+  ${font Ubuntu Mono:size=10}
+  ${goto 20}${color0}STORAGE${color #FFFFFF}
+  ${font Ubuntu Mono:size=8}
+  ${goto 20}${exec df -h | grep "/dev/nvme0n1p5" | awk '{ printf "%s of %s \t : %s\n", $5, $2, $6 }' }
+  ${goto 20}${exec df -h | grep "/dev/nvme0n1p3" | awk '{ printf "%s of %s \t : %s\n", $5, $2, $6 }' }
+  ${goto 20}${exec df -h | grep "/dev/sda1"      | awk '{ printf "%s of %s \t : %s\n", $5, $2, $6 }' }
+  ${color0}${font Ubuntu Mono:size=10}
+  ${goto 20}Name ${goto 200}Pid${goto 280}Cpu%${goto 360}Mem%${color}
+  ${goto 20}${top name 1} ${goto 185}${top pid 1}${goto 255}${top cpu 1}${goto 335}${top mem 1}
+  ${goto 20}${top name 2} ${goto 185}${top pid 2}${goto 255}${top cpu 2}${goto 335}${top mem 2}
+  ${goto 20}${top name 3} ${goto 185}${top pid 3}${goto 255}${top cpu 3}${goto 335}${top mem 3}
+  ${goto 20}${top name 4} ${goto 185}${top pid 4}${goto 255}${top cpu 4}${goto 335}${top mem 4}
+  ${goto 20}${top name 5} ${goto 185}${top pid 5}${goto 255}${top cpu 5}${goto 335}${top mem 5}
+
+  
+]];

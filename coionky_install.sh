@@ -11,6 +11,8 @@ echo "The files have been copied to ~/.config/conky."
 # the standard place conky looks for a config file
 cp -r * ~/.config/conky/
 
+cp .conkyrc ~/.conkyrc
+
 echo "Making sure conky autostarts next boot."
 # making sure conky is started at boot
 cp conky.desktop ~/.config/autostart/conky.desktop
