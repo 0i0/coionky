@@ -2,6 +2,7 @@
 A conky theme
 
 # Clone
+
     git clone https://github.com/0i0/coionky
 
 # Install
