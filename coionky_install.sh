@@ -24,4 +24,5 @@ if ! location="$(type -p "sensors")" || [ -z "sensors" ]; then
   	echo "lm-sensors is already installed. Proceeding..."
 
 fi
+echo "running conky.."
 conky -q ~/.config/conky/conky.conf &
