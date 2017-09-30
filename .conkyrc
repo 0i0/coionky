@@ -84,9 +84,9 @@ conky.text = [[${font ubuntu Mono:size=12}
   ${font Ubuntu Mono:size=10}
   ${goto 20}${color0}STORAGE${color #FFFFFF}
   ${font Ubuntu Mono:size=8}
-  ${goto 20}${exec df -h | grep "/dev/nvme0n1p5" | awk '{ printf "%s of %s \t : %s\n", $5, $2, $6 }' }
-  ${goto 20}${exec df -h | grep "/dev/nvme0n1p3" | awk '{ printf "%s of %s \t : %s\n", $5, $2, $6 }' }
-  ${goto 20}${exec df -h | grep "/dev/sda1"      | awk '{ printf "%s of %s \t : %s\n", $5, $2, $6 }' }
+  ${goto 20}${exec df -h | grep "/dev/nvme0n1p5" | awk '{ printf "%s of %s \t %s\n", $5, $2, $6 }' }
+  ${goto 20}${exec df -h | grep "/dev/nvme0n1p3" | awk '{ printf "%s of %s \t %s\n", $5, $2, $6 }' }
+  ${goto 20}${exec df -h | grep "/dev/sda1"      | awk '{ printf "%s of %s \t %s\n", $5, $2, $6 }' }
   ${color0}${font Ubuntu Mono:size=10}
   ${goto 20}Name ${goto 200}Pid${goto 280}Cpu%${goto 360}Mem%${color}
   ${goto 20}${top name 1} ${goto 185}${top pid 1}${goto 255}${top cpu 1}${goto 335}${top mem 1}
