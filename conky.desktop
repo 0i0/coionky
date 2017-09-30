@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name[en_US]=start-conky
+Exec=conky
+Terminal=false
