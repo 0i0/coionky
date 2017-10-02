@@ -24,5 +24,19 @@ if ! location="$(type -p "sensors")" || [ -z "sensors" ]; then
   	echo "lm-sensors is already installed. Proceeding..."
 
 fi
+if ! location="$(type -p "jq")" || [ -z "jq" ]; then
+	echo "installing jq this script to work"
+  	sudo apt-get install jq
+  else
+  	echo "jq is already installed. Proceeding..."
+
+fi
+if ! location="$(type -p "curl")" || [ -z "curl" ]; then
+	echo "installing curl this script to work"
+  	sudo apt-get install curl
+  else
+  	echo "curl is already installed. Proceeding..."
+
+fi
 echo "running conky.."
 conky -q ~/.config/conky/conky.conf &

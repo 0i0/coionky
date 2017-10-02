@@ -102,17 +102,7 @@ function draw_ring(cr,t,pt)
   cairo_stroke(cr)
 end
 
-function DrawLine (cr,start_x,start_y,end_x,end_y,linewidth)
-  -- set colour (r,g,b,alpha)
-  cairo_set_source_rgba(cr,1,1,1,0.8)
-  cairo_move_to(cr,conky_window.width - start_x,start_y)
-  cairo_rel_line_to(cr,-end_x,end_y)
-  cairo_set_line_width(cr,linewidth)
-  cairo_stroke(cr)
-
-end
-
-function RoundRect (cr,start_x,start_y,width,height)
+function RoundRect (cr,start_x,start_y,width,height,r,g,b,a)
   x         = start_x
   y         = start_y
   aspect        = 1     
@@ -128,26 +118,26 @@ function RoundRect (cr,start_x,start_y,width,height)
   cairo_arc (cr, x + radius, y + radius, radius, 180 * degrees, 270 * degrees)
   cairo_close_path (cr)
 
-  cairo_set_source_rgba(cr,1,1,1,0.1)
+  cairo_set_source_rgba(cr,r,g,b,a)
   cairo_fill_preserve (cr)
-  cairo_set_source_rgba (cr, 0.5, 0, 0, 0.5)
-  cairo_set_line_width (cr, 0)
-  cairo_stroke (cr)
+  --cairo_set_source_rgba (cr, 0.5, 0, 0, 0.5)
+  --cairo_set_line_width (cr, 0)
+  --cairo_stroke (cr)
 end
 
 function DrawBars (cr,start_x,start_y,bar_width,bar_height,corenum,r,g,b)
   -- set colour (r,g,b,alpha)
   cairo_set_source_rgba(cr,1,1,1,0.1)
-  RoundRect (cr,start_x,start_y,bar_width,bar_height)
+  RoundRect (cr,start_x,start_y,bar_width,bar_height,1,1,1,0.1)
   cairo_fill(cr)
-  cairo_set_source_rgba(cr,r,g,b,1)
+  cairo_set_source_rgba(cr,r,g,b,a)
   value = tonumber(conky_parse(string.format("${exec sensors | grep -o 'Core %s:        +[0-9].' | sed -r 's/%s:|[^0-9]//g'}",corenum,corenum)))
   -- IF TEMP BARS DO NOT SHOW, try commenting the line above with '--' and uncommenting the line below by removing '--'. (Thanks to /u/IAmAFedora)
   --value = tonumber(conky_parse(string.format("${exec sensors | grep -o 'Core %s:         +[0-9].' | sed -r 's/%s:|[^0-9]//g'}",corenum,corenum)))
   max_value=100
   scale=bar_height/max_value
   indicator_height=scale*value
-  RoundRect (cr,start_x,start_y+bar_height-indicator_height,bar_width,indicator_height)
+  RoundRect (cr,start_x,start_y+bar_height-indicator_height,bar_width,indicator_height,r,g,b,0.5)
   cairo_fill (cr)
 end
 
