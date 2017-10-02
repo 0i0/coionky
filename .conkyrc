@@ -94,7 +94,8 @@ conky.text = [[${font ubuntu Mono:size=12}
   ${goto 20}${top name 3} ${goto 185}${top pid 3}${goto 255}${top cpu 3}${goto 335}${top mem 3}
   ${goto 20}${top name 4} ${goto 185}${top pid 4}${goto 255}${top cpu 4}${goto 335}${top mem 4}
   ${goto 20}${top name 5} ${goto 185}${top pid 5}${goto 255}${top cpu 5}${goto 335}${top mem 5}
-
+  ${color0}
+  ${goto 50}Crypto${color}
   ${goto 50}${execi 60  curl -s https://api.coinmarketcap.com/v1/ticker/ |
                         jq '.[]|select((.rank|tonumber)<6)|{id,price_usd}|.id+" "+.price_usd'|
                         awk '{gsub(/"/, "", $0);print substr($1,0,10) "/usd\t" $2}'
