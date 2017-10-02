@@ -3,7 +3,7 @@ cpu0 = 0x3b31b6
 cpu1 = 0x5b31b6
 cpu2 = 0x7b31b6
 cpu3 = 0x9b31b6
-
+gpu =  0x1b31b6
 cpu_x = 100
 cpu_y = 260
 
@@ -71,6 +71,21 @@ settings_table = {
      start_angle=140,
      end_angle=450
    }
+   ,
+   {
+     name='exec',
+     arg=" nvidia-settings -t -q [gpu:0]/GPUUtilization | awk -F, '{print $1}'|awk -F= '{print $2}'",
+     max=100,
+     bg_colour=0xffffff,
+     bg_alpha=0.1,
+     fg_colour=gpu,
+     fg_alpha=0.6,
+     x=320, y=405,
+     radius=40,
+     thickness=20,
+     start_angle=-90,
+     end_angle=180
+   }
 }
 
 
@@ -125,19 +140,23 @@ function RoundRect (cr,start_x,start_y,width,height,r,g,b,a)
   --cairo_stroke (cr)
 end
 
-function DrawBars (cr,start_x,start_y,bar_width,bar_height,corenum,r,g,b)
+function DrawBars (cr,is_gpu,start_x,start_y,bar_width,bar_height,corenum,r,g,b)
   -- set colour (r,g,b,alpha)
   cairo_set_source_rgba(cr,1,1,1,0.1)
   RoundRect (cr,start_x,start_y,bar_width,bar_height,1,1,1,0.1)
   cairo_fill(cr)
   cairo_set_source_rgba(cr,r,g,b,a)
-  value = tonumber(conky_parse(string.format("${exec sensors | grep -o 'Core %s:        +[0-9].' | sed -r 's/%s:|[^0-9]//g'}",corenum,corenum)))
+  if(is_gpu == 1) then
+    value = tonumber(conky_parse("${exec nvidia-settings -t -q [gpu:0]/GPUCoreTemp}"))
+  else
+    value = tonumber(conky_parse(string.format("${exec sensors | grep -o 'Core %s:        +[0-9].' | sed -r 's/%s:|[^0-9]//g'}",corenum,corenum)))
+  end
   -- IF TEMP BARS DO NOT SHOW, try commenting the line above with '--' and uncommenting the line below by removing '--'. (Thanks to /u/IAmAFedora)
   --value = tonumber(conky_parse(string.format("${exec sensors | grep -o 'Core %s:         +[0-9].' | sed -r 's/%s:|[^0-9]//g'}",corenum,corenum)))
   max_value=100
   scale=bar_height/max_value
   indicator_height=scale*value
-  RoundRect (cr,start_x,start_y+bar_height-indicator_height,bar_width,indicator_height,r,g,b,0.5)
+  RoundRect (cr,start_x,start_y+bar_height-indicator_height,bar_width,indicator_height,r,g,b,0.1)
   cairo_fill (cr)
 end
 
@@ -165,16 +184,14 @@ function conky_rings()
   local updates=conky_parse('${updates}')
   update_num=tonumber(updates)
 
-  if update_num>5 then
     for i in pairs(settings_table) do
       setup_rings(cr,settings_table[i])
     end
-  end
   --draw cpu temp bars
-  DrawBars(cr,temp_x                        ,temp_y,temp_width,120,0,rgb_to_r_g_b(cpu0))
-  DrawBars(cr,temp_x+1*(temp_sep+temp_width),temp_y,temp_width,120,1,rgb_to_r_g_b(cpu1))
-  DrawBars(cr,temp_x+2*(temp_sep+temp_width),temp_y,temp_width,120,2,rgb_to_r_g_b(cpu2))
-  DrawBars(cr,temp_x+3*(temp_sep+temp_width),temp_y,temp_width,120,3,rgb_to_r_g_b(cpu3))
-  --draw cpu temp lines
-  --draw mem lines
+  DrawBars(cr,false,temp_x                        ,temp_y,temp_width,120,0,rgb_to_r_g_b(0xffffff))
+  DrawBars(cr,false,temp_x+1*(temp_sep+temp_width),temp_y,temp_width,120,1,rgb_to_r_g_b(0xffffff))
+  DrawBars(cr,false,temp_x+2*(temp_sep+temp_width),temp_y,temp_width,120,2,rgb_to_r_g_b(0xffffff))
+  DrawBars(cr,false,temp_x+3*(temp_sep+temp_width),temp_y,temp_width,120,3,rgb_to_r_g_b(0xffffff))
+  -- gpu tem[]
+  --DrawBars(cr,true,390,390,temp_width,120,0,rgb_to_r_g_b(0xffffff))
 end
