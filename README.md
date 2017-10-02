@@ -11,4 +11,4 @@ A conky theme
 
 # Enjoy
 
-![Screenshots](https://i.imgur.com/MYGmbl7.png)
+![Screenshots](https://i.imgur.com/Ss9T5nt.jpg)

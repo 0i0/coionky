@@ -79,7 +79,7 @@ conky.text = [[${font ubuntu Mono:size=12}
   ${offset  230}${voffset -20}${color3}${exec sensors | grep -o 'Core 3:        +[0-9].' | sed -r 's/3:|[^0-9]//g'}°
   ${font Ubuntu Mono:size=10}
   ${offset  220}${voffset 25}${color}GPU
-  ${offset  195}${voffset 05}${color4}${font Ubuntu Mono:size=8}${exec nvidia-settings -t -q [gpu:0]/GPUCoreTemp}°
+  ${offset  195}${voffset 05}${color #1b31b6}${font Ubuntu Mono:size=8}${exec nvidia-settings -t -q [gpu:0]/GPUCoreTemp}°
   ${goto 20}${font Ubuntu Mono:size=10}${color0}RAM
 
   ${goto 20}${color #FFFFFF}$mem/$memmax${font Ubuntu Mono:size=8}${color cccccc}($memperc%)
