@@ -17,11 +17,18 @@ echo "Making sure conky autostarts next boot."
 # making sure conky is started at boot
 cp conky.desktop ~/.config/autostart/conky.desktop
 
-if ! location="$(type -p "sensors")" || [ -z "sensors" ]; then
-	echo "installing lm-sensors for this script to work"
-  	sudo apt-get install lm-sensors
+if ! location="$(type -p "conkey")" || [ -z "conkey" ]; then
+  echo "installing conkey with lua for this script to work"
+    sudo apt-get install conky-all
   else
-  	echo "lm-sensors is already installed. Proceeding..."
+    echo "conkey with lua is already installed. Proceeding..."
+
+fi
+if ! location="$(type -p "sensors")" || [ -z "sensors" ]; then
+  echo "installing lm-sensors for this script to work"
+    sudo apt-get install lm-sensors
+  else
+    echo "lm-sensors is already installed. Proceeding..."
 
 fi
 if ! location="$(type -p "jq")" || [ -z "jq" ]; then
