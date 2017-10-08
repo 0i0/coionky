@@ -1,5 +1,8 @@
 # coionky
+
 A conky theme
+
+![Screenshots](https://i.imgur.com/45If32L.png)
 
 # Clone
 
@@ -10,8 +13,6 @@ A conky theme
     ./coionky_install.sh
 
 # Enjoy
-
-![Screenshots](https://i.imgur.com/Ss9T5nt.jpg)
 
 If you enjoyed please consider tipping me @
 
