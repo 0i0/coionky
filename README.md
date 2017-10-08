@@ -15,6 +15,10 @@ A conky theme
 
 If you enjoyed please consider tipping me @
 
-​Bitcoin 142jKB3e9uC8sSmssKtp5NtWScarZdYpuH
+Bitcoin
 
-Ethereum ​0x8423b2cA48Bd9a734B4FE27A4E78f64e12131B79​
+    142jKB3e9uC8sSmssKtp5NtWScarZdYpuH
+
+Ethereum
+
+    0x8423b2cA48Bd9a734B4FE27A4E78f64e12131B79​
